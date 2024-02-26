@@ -1,5 +1,6 @@
 import { BellIcon, MagnifyingGlassIcon } from '@heroicons/react/24/outline';
 import { useState } from 'react';
+import { useSelector } from 'react-redux';
 import AddTaskModal from '../components/tasks/AddTaskModal';
 import MyTasks from '../components/tasks/MyTasks';
 import TaskCard from '../components/tasks/TaskCard';
@@ -7,6 +8,9 @@ import TaskCard from '../components/tasks/TaskCard';
 const Tasks = () => {
 
   const [isOpen, setIsOpen] = useState(false);
+  const {tasks} = useSelector(state => state.tasksSlice);
+
+  // console.log(tasks)
 
   return (
     <div className="h-screen grid grid-cols-12">
@@ -43,7 +47,11 @@ const Tasks = () => {
               </p>
             </div>
             <div className="space-y-3">
-              <TaskCard />
+          { tasks.map(task =>  <TaskCard 
+            key={task.id}
+            task={task}
+            /> ) 
+          }
             </div>
           </div>
           <div className="relative h-[800px] overflow-auto">
@@ -54,8 +62,11 @@ const Tasks = () => {
               </p>
             </div>
             <div className="space-y-3">
-              <TaskCard />
-              <TaskCard />
+            { tasks.map(task =>  <TaskCard 
+              key={task.id}
+              task={task}
+              /> ) 
+            }
             </div>
           </div>
           <div className="relative h-[800px] overflow-auto">
@@ -66,7 +77,11 @@ const Tasks = () => {
               </p>
             </div>
             <div className="space-y-3">
-              <TaskCard />
+            { tasks.map(task =>  <TaskCard 
+              key={task.id}
+              task={task}
+              /> ) 
+            }
             </div>
           </div>
         </div>
